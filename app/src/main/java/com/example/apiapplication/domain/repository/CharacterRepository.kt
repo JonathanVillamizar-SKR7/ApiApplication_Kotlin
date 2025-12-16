@@ -7,7 +7,7 @@ import com.example.apiapplication.domain.model.Character
  *
  * Data implementará esta interfaz, pero Domain nunca conocerá Retrofit.
  */
-interface Repository {
+interface CharacterRepository {
     suspend fun getCharacters(): List<Character>
 }
 
