@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 // El viewModel depende de la interfaz del dominio, no del retrofit
 // Clean Architecture puro
 class CharacterViewModel(
-    private val repository: CharacterRepository
+    val repository: CharacterRepository
 ) : ViewModel() {
     // StateFlow para almacenar la lista de personajes
     // Estado observable : _characters es interno
@@ -34,9 +34,11 @@ class CharacterViewModel(
         viewModelScope.launch { // Corrutina
             _isLoading.value = true
             try {
-                _characters.value = repository.getCharacters() // capa data
+                val result = repository.getCharacters()
+                println("VIEWMODEL -> Characters loaded: ${result.size}")
+                _characters.value = result // capa data
             } catch (e: Exception) {
-                // Manejar errores
+                println("VIEWMODEL ERROR -> ${e.message}")
             } finally {
                 _isLoading.value = false
             }

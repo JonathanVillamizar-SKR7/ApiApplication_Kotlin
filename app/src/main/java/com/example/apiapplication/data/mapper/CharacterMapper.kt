@@ -9,10 +9,17 @@ import com.example.apiapplication.domain.model.Character
 fun CharacterDto.toDomain(): Character {
     return Character(
         id = id,
-        name = name ?: "Unknown",
-        image = images?.firstOrNull(), // usamos solo la primera imagen
-        clan = personal?.clan,
-        affiliation = personal?.affiliation?.firstOrNull(),
+        name = name,
+        image = images?.firstOrNull(),
+        clan = when (val c = personal?.clan) {
+            is String -> c
+            is List<*> -> c.firstOrNull()?.toString()
+            else -> null
+        }, affiliation = when (val a = personal?.affiliation) {
+            is String -> a
+            is List<*> -> a.joinToString(", ")
+            else -> null
+        },
         kekkeiGenkai = kekkeiGenkai,
         natureTypes = natureTypes
     )
