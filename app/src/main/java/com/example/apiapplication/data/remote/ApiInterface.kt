@@ -1,11 +1,13 @@
 package com.example.apiapplication.data.remote
 
+import com.example.apiapplication.data.remote.dto.CharacterResponseDto
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 
 /**
@@ -18,11 +20,13 @@ interface ApiInterface {
     /**
      * GET /characters
      *
-     * Devuelve un Response<Data> donde Data contiene la lista
+     * Devuelve un Response<CharacterResponseDto> donde contiene la lista
      * de personajes dentro del campo "characters".
      */
     @GET("characters")
-    suspend fun getCharacters(): Response<Data>
+    suspend fun getCharacters(
+        @Query("page") page: Int = 1, @Query("limit") limit: Int = 40
+    ): Response<CharacterResponseDto>
 
     /**
      * Companion object para crear una instancia de Retrofit
@@ -53,5 +57,4 @@ interface ApiInterface {
         }
 
     }
-
 }

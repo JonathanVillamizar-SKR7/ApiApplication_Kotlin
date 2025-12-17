@@ -9,5 +9,6 @@ import com.example.apiapplication.domain.model.Character
  */
 interface CharacterRepository {
     suspend fun getCharacters(): List<Character>
+
 }
 

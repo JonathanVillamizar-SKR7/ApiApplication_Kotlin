@@ -1,7 +1,7 @@
 package com.example.apiapplication.data.repository
 
+import com.example.apiapplication.data.mapper.toDomain
 import com.example.apiapplication.data.remote.ApiInterface
-import com.example.apiapplication.data.remote.toDomain
 import com.example.apiapplication.domain.model.Character
 import com.example.apiapplication.domain.repository.CharacterRepository
 
@@ -21,4 +21,5 @@ class CharacterRepositoryImpl(
             throw Exception("API error")
         }
     }
+
 }
